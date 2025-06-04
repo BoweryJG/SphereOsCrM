@@ -13,6 +13,8 @@
     "@mui/x-data-grid": "^6.18.2",
     "@mui/x-date-pickers": "^6.18.2",
     "@netlify/functions": "^2.8.2",
+    "@react-three/drei": "^9.88.11",
+    "@react-three/fiber": "^8.15.12",
     "@supabase/supabase-js": "^2.49.8",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
