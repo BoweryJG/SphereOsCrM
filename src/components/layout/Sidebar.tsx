@@ -26,7 +26,8 @@ import {
   Settings as SettingsIcon,
   CreditCard as CreditCardIcon,
   School as SchoolIcon,
-  LocalHospital as HospitalIcon
+  LocalHospital as HospitalIcon,
+  ContactMail as ContactMailIcon
 } from '@mui/icons-material';
 import { useThemeContext } from '../../themes/ThemeContext';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -59,6 +60,7 @@ const Sidebar: React.FC<{ open: boolean; onClose: () => void; drawerWidth: numbe
         { title: 'Dashboard', path: '/', icon: <DashboardIcon /> },
         { title: 'Contacts', path: '/contacts', icon: <PersonIcon /> },
         { title: 'Practices', path: '/practices', icon: <BusinessIcon /> },
+        { title: 'Personal Contacts', path: '/personal-contacts', icon: <ContactMailIcon /> },
         { title: 'Region Analytics', path: '/analytics', icon: <AssessmentIcon /> },
         { title: 'Rep Analytics', path: '/rep-analytics', icon: <AssessmentIcon /> }
       ]

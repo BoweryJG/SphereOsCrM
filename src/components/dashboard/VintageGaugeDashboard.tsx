@@ -292,7 +292,7 @@ export const VintageGaugeDashboard: React.FC = () => {
       </Box>
       
       {/* CSS for rotation animation */}
-      <style jsx global>{`
+      <style>{`
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }

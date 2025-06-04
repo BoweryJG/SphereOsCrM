@@ -40,6 +40,7 @@ const KnowledgeDental = lazy(() => import('./pages/KnowledgeDental'));
 const KnowledgeAesthetic = lazy(() => import('./pages/KnowledgeAesthetic'));
 const Settings = lazy(() => import('./pages/Settings'));
 const Profile = lazy(() => import('./pages/Profile'));
+const PersonalContacts = lazy(() => import('./pages/PersonalContacts'));
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -103,6 +104,7 @@ const App: React.FC = () => {
                 <Route path="subscribe/cancel" element={<Suspense fallback={<div>Loading...</div>}><SubscribeCancel /></Suspense>} />
                 <Route path="settings" element={<Suspense fallback={<StandaloneEliteLoadingScreen loadingText="Loading Settings" message="Preparing your preferences..." />}><Settings /></Suspense>} />
                 <Route path="profile" element={<Suspense fallback={<StandaloneEliteLoadingScreen loadingText="Loading Profile" message="Retrieving your profile..." />}><Profile /></Suspense>} />
+                <Route path="personal-contacts" element={<Suspense fallback={<StandaloneEliteLoadingScreen loadingText="Loading Contacts" message="Retrieving your personal contacts..." />}><PersonalContacts /></Suspense>} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Route>
             </Routes>
