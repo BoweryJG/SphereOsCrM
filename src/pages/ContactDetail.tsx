@@ -30,6 +30,7 @@ import { fetchContactById } from '../services/supabase/supabaseService';
 import { Contact } from '../types/models';
 import CallButton from '../components/contacts/CallButton';
 import CallHistory from '../components/contacts/CallHistory';
+import ContactProcedureRecommendations from '../components/recommendations/ContactProcedureRecommendations';
 
 const ContactDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -302,7 +303,22 @@ const ContactDetail: React.FC = () => {
           {/* Call History Component */}
           <CallHistory contactId={contact.id} />
           
-          {/* Additional sections can be added here */}
+          {/* Procedure Recommendations */}
+          <Paper variant="outlined" sx={{ p: 2, mt: 3 }}>
+            <ContactProcedureRecommendations
+              contactId={contact.id}
+              contactProfile={{
+                name: `${contact.first_name} ${contact.last_name}`,
+                previousProcedures: contact.tags || [],
+                interests: contact.specialization ? [contact.specialization] : [],
+                budget: 'medium'
+              }}
+              onProcedureAdd={(procedure) => {
+                console.log('Adding procedure to treatment plan:', procedure);
+                // TODO: Implement adding procedure to treatment plan
+              }}
+            />
+          </Paper>
         </Box>
       </Box>
     </Box>

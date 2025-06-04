@@ -10,6 +10,8 @@ import {
 import DashboardStats from '../components/dashboard/DashboardStats';
 import QuickCallWidget from '../components/dashboard/QuickCallWidget';
 import NowCardsStack from '../components/dashboard/NowCardsStack'; // Added import
+import VintageGaugeDashboard from '../components/dashboard/VintageGaugeDashboard'; // Added vintage gauges
+import ProcedureRecommendations from '../components/recommendations/ProcedureRecommendations'; // Added market intelligence
 import { useThemeContext } from '../themes/ThemeContext';
 import { getMockDashboardData } from '../services/mockData/mockDataService';
 
@@ -45,6 +47,11 @@ const Dashboard: React.FC = () => {
         <Typography variant="body1" color="text.secondary">
           Here's an overview of your sales performance and activity
         </Typography>
+      </Box>
+
+      {/* Vintage Gauge Performance Dashboard */}
+      <Box sx={{ mb: 4 }}>
+        <VintageGaugeDashboard />
       </Box>
 
       {/* Stats Cards */}
@@ -204,7 +211,7 @@ const Dashboard: React.FC = () => {
         </Paper>
       </Box>
 
-      {/* Market Intelligence Preview */}
+      {/* Market Intelligence & Procedure Recommendations */}
       <Box sx={{ mb: 4 }}>
         <Paper
           elevation={0}
@@ -222,20 +229,18 @@ const Dashboard: React.FC = () => {
             }`
           }}
         >
-          <Typography variant="h6" fontWeight={600} gutterBottom>
-            Market Intelligence
-          </Typography>
-          <Typography variant="body2" paragraph>
-            Recent trends in the dental implant market show a {getRandomInt(12, 18)}% increase in demand for minimally invasive procedures. 
-            Aesthetic procedures, particularly for injectables, have seen a {getRandomInt(20, 25)}% growth in the last quarter.
-          </Typography>
-          <Typography variant="body2" paragraph>
-            Key opportunity: Practices in your region are increasingly interested in combined treatment packages that 
-            integrate both dental and aesthetic procedures for comprehensive patient care.
-          </Typography>
-          <Typography variant="body2" sx={{ fontStyle: 'italic', mt: 2, color: 'text.secondary' }}>
-            Market data refreshed {new Date().toLocaleDateString()} at {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-          </Typography>
+          <ProcedureRecommendations
+            practiceProfile={{
+              type: 'dental',
+              size: 'medium',
+              procedures: ['Teeth Whitening', 'Dental Implants', 'Root Canal', 'Orthodontics'],
+              annual_revenue: 2500000
+            }}
+            onProcedureSelect={(procedure) => {
+              console.log('Selected procedure from dashboard:', procedure);
+              // TODO: Navigate to procedure detail or add to opportunity
+            }}
+          />
         </Paper>
       </Box>
     </Box>
