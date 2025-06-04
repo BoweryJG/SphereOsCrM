@@ -7,6 +7,7 @@ import { ThemeProvider } from './themes/ThemeContext';
 import { AuthProvider } from './hooks/useAuth';
 import { AppModeProvider } from './contexts/AppModeContext';
 import SphereLoadingScreen from './components/common/SphereLoadingScreen';
+import StandaloneEliteLoadingScreen from './components/common/StandaloneEliteLoadingScreen';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/Dashboard';
