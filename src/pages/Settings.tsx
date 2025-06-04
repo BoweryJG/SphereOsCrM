@@ -27,10 +27,12 @@ import {
   PhoneAndroid as PhoneIcon,
   Email as EmailIcon,
   Palette as PaletteIcon,
-  Save as SaveIcon
+  Save as SaveIcon,
+  Phone as TwilioIcon
 } from '@mui/icons-material';
 import { useThemeContext } from '../themes/ThemeContext';
 import ThemeToggle from '../components/ui/ThemeToggle';
+import TwilioSettings from '../components/settings/TwilioSettings';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -171,6 +173,7 @@ const Settings: React.FC = () => {
             <Tab icon={<SettingsIcon />} label="General" />
             <Tab icon={<NotificationsIcon />} label="Notifications" />
             <Tab icon={<SecurityIcon />} label="Privacy & Security" />
+            <Tab icon={<TwilioIcon />} label="Twilio" />
             <Tab icon={<PhoneIcon />} label="Communication" />
             <Tab icon={<PaletteIcon />} label="Appearance" />
           </Tabs>
@@ -384,8 +387,15 @@ const Settings: React.FC = () => {
           </Box>
         </TabPanel>
 
-        {/* Communication */}
+        {/* Twilio Configuration */}
         <TabPanel value={tabValue} index={3}>
+          <Box sx={{ p: 3 }}>
+            <TwilioSettings />
+          </Box>
+        </TabPanel>
+
+        {/* Communication */}
+        <TabPanel value={tabValue} index={4}>
           <Box sx={{ p: 3 }}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
@@ -443,7 +453,7 @@ const Settings: React.FC = () => {
         </TabPanel>
 
         {/* Appearance */}
-        <TabPanel value={tabValue} index={4}>
+        <TabPanel value={tabValue} index={5}>
           <Box sx={{ p: 3 }}>
             <Grid container spacing={3}>
               <Grid item xs={12}>

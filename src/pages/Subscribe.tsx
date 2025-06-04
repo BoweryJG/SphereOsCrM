@@ -22,7 +22,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { useAppMode } from '../contexts/AppModeContext';
 
 type BillingCycle = 'monthly' | 'annual';
-type SubscriptionTier = 'explorer' | 'professional' | 'insights';
+type SubscriptionTier = 'explorer' | 'professional' | 'growth' | 'enterprise' | 'elite';
 
 const Subscribe: React.FC = () => {
   const theme = useTheme();
@@ -61,52 +61,99 @@ const Subscribe: React.FC = () => {
     }
   };
 
-  // Pricing configuration
+  // Pricing configuration - aligned with Canvas Header
   const pricing = {
     explorer: {
-      monthly: 0,
-      annual: 0,
+      monthly: 49,
+      annual: 490, // ~2 months free
       features: {
         basic: [
-          'Demo mode only',
-          'Limited call recording (5 calls/month)',
+          'Live mode access',
+          '50 call recordings per month',
           'Basic call transcription',
-          'Sample linguistics insights'
+          'Basic sentiment analysis',
+          'Call tagging and organization',
+          '10 linguistics analyses per month',
+          'Export to PDF'
         ],
         premium: []
       }
     },
     professional: {
-      monthly: 29,
-      annual: 290, // Save ~17%
+      monthly: 149,
+      annual: 1490, // Save ~17%
       features: {
         basic: [
-          'Live mode access',
-          'Unlimited call recording and storage',
+          'Everything in Explorer',
+          '200 call recordings per month',
           'Full call transcription',
-          'Basic sentiment analysis',
-          'Call tagging and organization',
-          '10 linguistics analyses per month'
+          'Advanced sentiment analysis',
+          'Priority support',
+          '50 linguistics analyses per month',
+          'Export to PDF/Excel',
+          'Basic analytics dashboard'
         ],
         premium: []
       }
     },
-    insights: {
-      monthly: 79,
-      annual: 790, // Save ~17%
+    growth: {
+      monthly: 349,
+      annual: 3490, // Save ~17%
       features: {
         basic: [
-          'Everything in Professional plan',
-          'Unlimited linguistics analyses',
-          'Detailed sentiment progression tracking',
-          'Key phrase extraction',
-          'Topic segmentation'
+          'Everything in Professional',
+          '500 call recordings per month',
+          'Linguistics AI personalization',
+          'Automated follow-ups',
+          'Competition tracking',
+          '150 linguistics analyses per month'
         ],
         premium: [
-          'Action item identification',
-          'Speaking pace and talk-to-listen ratio',
-          'Competitive intelligence extraction',
-          'Custom dashboards and reports'
+          'Advanced analytics dashboard',
+          'Team sharing (up to 5)',
+          'API access (limited)',
+          'Priority support (2hr)'
+        ]
+      }
+    },
+    enterprise: {
+      monthly: 749,
+      annual: 7490, // Save ~17%
+      features: {
+        basic: [
+          'Everything in Growth',
+          '1,500 call recordings per month',
+          'Unlimited CRM contacts',
+          'Custom integrations',
+          '500 linguistics analyses per month'
+        ],
+        premium: [
+          'Dedicated success manager',
+          'Advanced AI training',
+          'Team sharing (up to 20)',
+          'Full API access',
+          'HIPAA compliance ready'
+        ]
+      }
+    },
+    elite: {
+      monthly: 1499,
+      annual: 14990, // Save ~17%
+      features: {
+        basic: [
+          'Everything in Enterprise',
+          'Unlimited call recordings',
+          'Unlimited linguistics analyses',
+          'White-label options',
+          'Custom domain'
+        ],
+        premium: [
+          'Dedicated infrastructure',
+          '24/7 phone support',
+          'Custom AI models',
+          'Unlimited team members',
+          'SLA guarantee',
+          'Quarterly business reviews'
         ]
       }
     }
@@ -156,222 +203,146 @@ const Subscribe: React.FC = () => {
         </Box>
       </Box>
 
-      <Grid container spacing={3} justifyContent="center">
-        {/* Explorer Plan (Free) */}
-        <Grid item xs={12} md={4}>
-          <Paper 
-            elevation={3} 
-            sx={{ 
-              p: 3, 
-              height: '100%', 
-              display: 'flex', 
-              flexDirection: 'column',
-              borderRadius: 2,
-              transition: 'transform 0.2s',
-              '&:hover': {
-                transform: 'translateY(-5px)'
-              }
-            }}
-          >
-            <Typography variant="h5" fontWeight="bold" gutterBottom>
-              Explorer
+      <Grid container spacing={2} justifyContent="center">
+        {/* Free Trial Note */}
+        <Grid item xs={12}>
+          <Box sx={{ textAlign: 'center', mb: 3, p: 2, bgcolor: alpha(theme.palette.info.main, 0.1), borderRadius: 2 }}>
+            <Typography variant="body1" color="info.main">
+              🎉 All plans include a 10-day free trial. No credit card required to start.
             </Typography>
-            <Typography variant="h3" fontWeight="bold" gutterBottom>
-              Free
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Try out SphereOS CRM with limited features
-            </Typography>
-            
-            <Divider sx={{ my: 2 }} />
-            
-            <List dense sx={{ flexGrow: 1 }}>
-              {pricing.explorer.features.basic.map((feature, index) => (
-                <ListItem key={index} disableGutters>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon color="success" fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary={feature} />
-                </ListItem>
-              ))}
-            </List>
-            
-            <Button 
-              variant="outlined" 
-              color="primary" 
-              fullWidth 
-              sx={{ mt: 2 }}
-              disabled={mode === 'demo'}
-            >
-              Current Plan
-            </Button>
-          </Paper>
+          </Box>
         </Grid>
         
-        {/* Professional Plan */}
-        <Grid item xs={12} md={4}>
-          <Paper 
-            elevation={6} 
-            sx={{ 
-              p: 3, 
-              height: '100%', 
-              display: 'flex', 
-              flexDirection: 'column',
-              borderRadius: 2,
-              border: `2px solid ${theme.palette.primary.main}`,
-              position: 'relative',
-              transition: 'transform 0.2s',
-              '&:hover': {
-                transform: 'translateY(-5px)'
-              }
-            }}
-          >
-            <Chip 
-              label="MOST POPULAR" 
-              color="primary" 
-              size="small" 
-              sx={{ 
-                position: 'absolute', 
-                top: -12, 
-                left: '50%', 
-                transform: 'translateX(-50%)',
-                fontWeight: 'bold'
-              }} 
-            />
-            
-            <Typography variant="h5" fontWeight="bold" gutterBottom>
-              Professional
-            </Typography>
-            <Typography variant="h3" fontWeight="bold" gutterBottom>
-              ${pricing.professional[billingCycle]}
-              <Typography component="span" variant="body1" color="text.secondary">
-                /{billingCycle === 'monthly' ? 'mo' : 'yr'}
-              </Typography>
-            </Typography>
-            {billingCycle === 'annual' && (
-              <Typography variant="body2" color="success.main" sx={{ mb: 2 }}>
-                Save ${getSavings('professional').savings}/year ({getSavings('professional').savingsPercentage}% off)
-              </Typography>
-            )}
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Perfect for sales reps who need live data and call recording
-            </Typography>
-            
-            <Divider sx={{ my: 2 }} />
-            
-            <List dense sx={{ flexGrow: 1 }}>
-              {pricing.professional.features.basic.map((feature, index) => (
-                <ListItem key={index} disableGutters>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon color="success" fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary={feature} />
-                </ListItem>
-              ))}
-            </List>
-            
-            <Button 
-              variant="contained" 
-              color="primary" 
-              fullWidth 
-              sx={{ mt: 2 }}
-              onClick={() => handleSubscribe('professional')}
-            >
-              {mode === 'live' ? 'Upgrade Now' : 'Get Started'}
-            </Button>
-          </Paper>
-        </Grid>
-        
-        {/* Insights Plan */}
-        <Grid item xs={12} md={4}>
-          <Paper 
-            elevation={3} 
-            sx={{ 
-              p: 3, 
-              height: '100%', 
-              display: 'flex', 
-              flexDirection: 'column',
-              borderRadius: 2,
-              backgroundColor: alpha(theme.palette.primary.main, 0.03),
-              transition: 'transform 0.2s',
-              '&:hover': {
-                transform: 'translateY(-5px)'
-              }
-            }}
-          >
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-              <Typography variant="h5" fontWeight="bold" gutterBottom>
-                Insights
-              </Typography>
-              <StarIcon color="primary" sx={{ ml: 1 }} />
-            </Box>
-            <Typography variant="h3" fontWeight="bold" gutterBottom>
-              ${pricing.insights[billingCycle]}
-              <Typography component="span" variant="body1" color="text.secondary">
-                /{billingCycle === 'monthly' ? 'mo' : 'yr'}
-              </Typography>
-            </Typography>
-            {billingCycle === 'annual' && (
-              <Typography variant="body2" color="success.main" sx={{ mb: 2 }}>
-                Save ${getSavings('insights').savings}/year ({getSavings('insights').savingsPercentage}% off)
-              </Typography>
-            )}
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Advanced linguistics analysis for sales professionals who want to maximize every call
-            </Typography>
-            
-            <Divider sx={{ my: 2 }} />
-            
-            <List dense sx={{ flexGrow: 1 }}>
-              {pricing.insights.features.basic.map((feature, index) => (
-                <ListItem key={index} disableGutters>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon color="success" fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary={feature} />
-                </ListItem>
-              ))}
-              
-              {pricing.insights.features.premium.length > 0 && (
-                <>
-                  <ListItem sx={{ pt: 2 }}>
-                    <Typography variant="subtitle2" color="primary" fontWeight="bold">
-                      Premium Features:
-                    </Typography>
-                  </ListItem>
-                  
-                  {pricing.insights.features.premium.map((feature, index) => (
-                    <ListItem key={`premium-${index}`} disableGutters>
+        {/* Render all tiers */}
+        {Object.entries(pricing).map(([tierKey, tier], index) => {
+          const isPopular = tierKey === 'professional';
+          const isElite = tierKey === 'elite';
+          
+          return (
+            <Grid item xs={12} sm={6} lg={index < 3 ? 4 : 3} key={tierKey}>
+              <Paper 
+                elevation={isPopular ? 6 : 3} 
+                sx={{ 
+                  p: 3, 
+                  height: '100%', 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  borderRadius: 2,
+                  border: isPopular ? `2px solid ${theme.palette.primary.main}` : 'none',
+                  backgroundColor: isElite ? alpha(theme.palette.primary.main, 0.05) : 'inherit',
+                  position: 'relative',
+                  transition: 'transform 0.2s',
+                  '&:hover': {
+                    transform: 'translateY(-5px)'
+                  }
+                }}
+              >
+                {isPopular && (
+                  <Chip 
+                    label="MOST POPULAR" 
+                    color="primary" 
+                    size="small" 
+                    sx={{ 
+                      position: 'absolute', 
+                      top: -12, 
+                      left: '50%', 
+                      transform: 'translateX(-50%)',
+                      fontWeight: 'bold'
+                    }} 
+                  />
+                )}
+                
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                  <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ textTransform: 'capitalize' }}>
+                    {tierKey}
+                  </Typography>
+                  {isElite && <StarIcon color="primary" sx={{ ml: 1 }} />}
+                </Box>
+                
+                <Typography variant="h3" fontWeight="bold" gutterBottom>
+                  ${tier[billingCycle]}
+                  <Typography component="span" variant="body1" color="text.secondary">
+                    /{billingCycle === 'monthly' ? 'mo' : 'yr'}
+                  </Typography>
+                </Typography>
+                
+                {billingCycle === 'annual' && (
+                  <Typography variant="body2" color="success.main" sx={{ mb: 2 }}>
+                    Save ${getSavings(tierKey as SubscriptionTier).savings}/year ({getSavings(tierKey as SubscriptionTier).savingsPercentage}% off)
+                  </Typography>
+                )}
+                
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  {tierKey === 'explorer' && 'Perfect for individual sales reps getting started'}
+                  {tierKey === 'professional' && 'Best for active sales professionals'}
+                  {tierKey === 'growth' && 'Ideal for growing sales teams'}
+                  {tierKey === 'enterprise' && 'For organizations requiring advanced features'}
+                  {tierKey === 'elite' && 'Ultimate solution for large enterprises'}
+                </Typography>
+                
+                <Divider sx={{ my: 2 }} />
+                
+                <List dense sx={{ flexGrow: 1 }}>
+                  {tier.features.basic.map((feature, featureIndex) => (
+                    <ListItem key={featureIndex} disableGutters>
                       <ListItemIcon sx={{ minWidth: 36 }}>
-                        <StarIcon color="primary" fontSize="small" />
+                        <CheckCircleIcon color="success" fontSize="small" />
                       </ListItemIcon>
                       <ListItemText 
                         primary={feature} 
-                        primaryTypographyProps={{ fontWeight: 'medium' }}
+                        primaryTypographyProps={{ fontSize: '0.875rem' }}
                       />
                     </ListItem>
                   ))}
-                </>
-              )}
-            </List>
-            
-            <Button 
-              variant="contained" 
-              color="primary" 
-              fullWidth 
-              sx={{ 
-                mt: 2,
-                backgroundColor: theme.palette.primary.dark,
-                '&:hover': {
-                  backgroundColor: theme.palette.primary.main,
-                }
-              }}
-              onClick={() => handleSubscribe('insights')}
-            >
-              Get Premium
-            </Button>
-          </Paper>
-        </Grid>
+                  
+                  {tier.features.premium.length > 0 && (
+                    <>
+                      <ListItem sx={{ pt: 1 }}>
+                        <Typography variant="subtitle2" color="primary" fontWeight="bold">
+                          Premium Features:
+                        </Typography>
+                      </ListItem>
+                      
+                      {tier.features.premium.map((feature, featureIndex) => (
+                        <ListItem key={`premium-${featureIndex}`} disableGutters>
+                          <ListItemIcon sx={{ minWidth: 36 }}>
+                            <StarIcon color="primary" fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText 
+                            primary={feature} 
+                            primaryTypographyProps={{ fontWeight: 'medium', fontSize: '0.875rem' }}
+                          />
+                        </ListItem>
+                      ))}
+                    </>
+                  )}
+                </List>
+                
+                <Button 
+                  variant={isPopular || isElite ? "contained" : "outlined"} 
+                  color="primary" 
+                  fullWidth 
+                  sx={{ 
+                    mt: 2,
+                    ...(isElite && {
+                      backgroundColor: theme.palette.primary.dark,
+                      '&:hover': {
+                        backgroundColor: theme.palette.primary.main,
+                      }
+                    })
+                  }}
+                  onClick={() => handleSubscribe(tierKey as SubscriptionTier)}
+                >
+                  {tierKey === 'explorer' && 'Start Free Trial'}
+                  {tierKey === 'professional' && 'Get Started'}
+                  {tierKey === 'growth' && 'Scale Up'}
+                  {tierKey === 'enterprise' && 'Go Enterprise'}
+                  {tierKey === 'elite' && 'Contact Sales'}
+                </Button>
+              </Paper>
+            </Grid>
+          );
+        })}
       </Grid>
       
       {/* Money-back guarantee and support info */}
@@ -381,6 +352,12 @@ const Subscribe: React.FC = () => {
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
           Need help choosing? Contact our sales team at sales@sphereoscrm.com
+        </Typography>
+        <Divider sx={{ my: 3 }} />
+        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 2 }}>
+          * Call recording limits refer to storage and transcription within Sphere oS CRM. 
+          Actual Twilio calling charges are billed separately based on usage.
+          Each account will need to configure their own Twilio phone number.
         </Typography>
       </Box>
     </Box>
