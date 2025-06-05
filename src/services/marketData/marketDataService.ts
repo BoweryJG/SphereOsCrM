@@ -181,7 +181,7 @@ class MarketDataService {
     // Filter procedures not currently offered
     const currentProcedureNames = practiceProfile.procedures.map(p => p.toLowerCase());
     const potentialProcedures = allProcedures.filter(
-      proc => !currentProcedureNames.includes(proc.procedure_name.toLowerCase())
+      proc => proc.procedure_name && !currentProcedureNames.includes(proc.procedure_name.toLowerCase())
     );
 
     // Score each procedure
