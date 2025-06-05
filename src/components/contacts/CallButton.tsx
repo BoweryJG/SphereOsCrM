@@ -170,7 +170,14 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
         </DialogTitle>
         
         <DialogContent>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', my: 2 }}>
+          <Box 
+            sx={{ 
+              display: 'flex', 
+              flexDirection: 'column' as const, 
+              alignItems: 'center', 
+              my: 2 
+            }}
+          >
             {/* Contact info */}
             <Typography variant="h6">
               {contact.first_name} {contact.last_name}
