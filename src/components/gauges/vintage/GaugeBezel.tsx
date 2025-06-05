@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
-import { materials } from '../materials/luxuryMaterials';
+import { materials } from '../../../materials/luxuryMaterials';
 
 interface GaugeBezelProps {
   radius?: number;

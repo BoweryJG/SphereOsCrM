@@ -4,10 +4,10 @@ import { Text, Plane } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { GaugeNeedle } from './GaugeNeedle';
 import { GaugeBezel } from './GaugeBezel';
-import { materials } from '../materials/luxuryMaterials';
-import { useNeedleAnimation } from '../hooks/useNeedleAnimation';
-import { GaugeConfig } from '../utils/gaugeConfig';
-import { gaugeFaceShader } from '../shaders/gaugeFaceShader';
+import { materials } from '../../../materials/luxuryMaterials';
+import { useNeedleAnimation } from './hooks/useNeedleAnimation';
+import { GaugeConfig } from '../../../utils/gaugeConfig';
+import { gaugeFaceShader } from './shaders/gaugeFaceShader';
 import * as THREE from 'three';
 
 interface GaugeProps {

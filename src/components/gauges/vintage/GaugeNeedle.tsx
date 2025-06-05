@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import * as THREE from 'three';
-import { materials } from '../materials/luxuryMaterials';
+import { materials } from '../../../materials/luxuryMaterials';
 
 interface GaugeNeedleProps {
   length?: number;

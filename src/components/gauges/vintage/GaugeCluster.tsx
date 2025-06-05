@@ -4,8 +4,8 @@ import { Environment, PerspectiveCamera, OrbitControls, EffectComposer, Bloom, C
 import { useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 import { Gauge } from './Gauge';
-import { gaugeConfigs } from '../utils/gaugeConfig';
-import { materials, updateMaterialEnvironment } from '../materials/luxuryMaterials';
+import { gaugeConfigs } from '../../../utils/gaugeConfig';
+import { materials, updateMaterialEnvironment } from '../../../materials/luxuryMaterials';
 import * as THREE from 'three';
 
 interface GaugeClusterProps {
