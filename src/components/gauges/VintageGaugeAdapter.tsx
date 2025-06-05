@@ -5,10 +5,10 @@ import * as THREE from 'three';
 import { Box, CircularProgress } from '@mui/material';
 
 // Import the vintage gauge components
-import { GaugeBezel } from '../../../../Desktop/vintagegauges/src/components/GaugeBezel';
-import { GaugeNeedle } from '../../../../Desktop/vintagegauges/src/components/GaugeNeedle';
-import { materials, updateMaterialEnvironment } from '../../../../Desktop/vintagegauges/src/materials/luxuryMaterials';
-import { getGaugeAngle } from '../../../../Desktop/vintagegauges/src/utils/gaugeConfig';
+import { GaugeBezel } from './vintage/GaugeBezel';
+import { GaugeNeedle } from './vintage/GaugeNeedle';
+import { materials, updateMaterialEnvironment } from '../../materials/luxuryMaterials';
+import { getGaugeAngle } from '../../utils/gaugeConfig';
 
 interface VintageGaugeProps {
   value: number;
