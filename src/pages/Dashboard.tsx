@@ -21,6 +21,7 @@ const getRandomInt = (min: number, max: number): number => {
 };
 
 const Dashboard: React.FC = () => {
+  console.log('Dashboard loaded successfully - test deployment');
   const theme = useTheme();
   const { themeMode } = useThemeContext();
   const [dashboardData, setDashboardData] = useState<any>(null);
