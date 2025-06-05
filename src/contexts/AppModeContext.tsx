@@ -98,7 +98,8 @@ export const AppModeProvider: React.FC<{children: React.ReactNode}> = ({ childre
             .from('app_settings')
             .upsert({ 
               user_id: user.id, 
-              app_mode: 'demo' 
+              app_mode: 'demo',
+              feature_tier: savedFeatureTier || 'basic'
             });
         } else if (settingsData) {
           setModeState(savedMode);

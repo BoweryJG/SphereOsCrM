@@ -303,19 +303,21 @@ export const initializeTwilioDevice = async (userId: string): Promise<boolean> =
   try {
     let tokenData = null;
     
-    // First try the local development server
-    try {
-      const localResponse = await fetch(`http://localhost:3000/token?identity=${encodeURIComponent(userId)}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      
-      if (localResponse.ok) {
-        tokenData = await localResponse.json();
-        console.log('Successfully obtained token from local development server');
+    // Only try local development server in development mode
+    if (process.env.NODE_ENV === 'development') {
+      try {
+        const localResponse = await fetch(`http://localhost:3000/token?identity=${encodeURIComponent(userId)}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        if (localResponse.ok) {
+          tokenData = await localResponse.json();
+          console.log('Successfully obtained token from local development server');
+        }
+      } catch (localError) {
+        console.log('Local token server not available, falling back to Netlify function');
       }
-    } catch (localError) {
-      console.log('Local token server not available, falling back to Netlify function');
     }
     
     // If local server failed, try the Netlify function

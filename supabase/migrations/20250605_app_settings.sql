@@ -39,3 +39,7 @@ $$ language 'plpgsql';
 
 CREATE TRIGGER update_app_settings_updated_at BEFORE UPDATE
   ON public.app_settings FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Grant access to authenticated users
+GRANT ALL ON public.app_settings TO authenticated;
+GRANT ALL ON public.app_settings TO service_role;
