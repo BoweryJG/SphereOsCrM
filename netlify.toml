@@ -7,6 +7,8 @@
 [build.environment]
   # Use Node 18 which matches package requirements
   NODE_VERSION = "18"
+  # Allow Supabase anon key in build output (it's meant to be public)
+  SECRETS_SCAN_OMIT_KEYS = "REACT_APP_MARKET_DATA_SUPABASE_ANON_KEY"
 
 [[redirects]]
   from = "/*"
