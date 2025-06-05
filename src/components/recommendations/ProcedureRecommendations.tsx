@@ -90,10 +90,8 @@ const FitScoreIndicator: React.FC<{ score: number }> = ({ score }) => {
         thickness={6}
         sx={{
           color: getColor(),
-          [`& .${CircularProgress.root}`]: {
-            circle: {
-              strokeLinecap: 'round',
-            },
+          '& .MuiCircularProgress-circle': {
+            strokeLinecap: 'round',
           },
         }}
       />
