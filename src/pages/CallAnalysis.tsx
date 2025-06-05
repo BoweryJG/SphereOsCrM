@@ -44,11 +44,14 @@ import {
   Pause as PauseIcon,
   SkipNext as SkipNextIcon,
   SkipPrevious as SkipPreviousIcon,
-  CloudDownload as CloudDownloadIcon
+  CloudDownload as CloudDownloadIcon,
+  Analytics as AnalyticsIcon
 } from '@mui/icons-material';
 
 import { CallAnalysis, LinguisticsAnalysis } from '../types';
 import { CallAnalysisService } from '../services/callAnalysis/callAnalysisService';
+import AdvancedLinguisticsInsights from '../components/linguistics/AdvancedLinguisticsInsights';
+import type { ComprehensiveLinguisticsAnalysis } from '../services/linguistics/advancedLinguisticsService';
 
 const CallAnalysisPage: React.FC = () => {
   const theme = useTheme();
@@ -58,6 +61,7 @@ const CallAnalysisPage: React.FC = () => {
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
   const [selectedCall, setSelectedCall] = useState<CallAnalysis | null>(null);
   const [linguisticsAnalysis, setLinguisticsAnalysis] = useState<LinguisticsAnalysis | null>(null);
+  const [advancedLinguistics, setAdvancedLinguistics] = useState<ComprehensiveLinguisticsAnalysis | null>(null);
   const [activeTab, setActiveTab] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -87,6 +91,7 @@ const CallAnalysisPage: React.FC = () => {
     } else {
       setSelectedCall(null);
       setLinguisticsAnalysis(null);
+      setAdvancedLinguistics(null);
     }
   }, [selectedCallId]);
 
@@ -126,6 +131,12 @@ const CallAnalysisPage: React.FC = () => {
       } else {
         setLinguisticsAnalysis(null);
       }
+      
+      // Fetch advanced linguistics analysis
+      if (callData) {
+        const advancedData = await CallAnalysisService.getAdvancedLinguisticsAnalysis(callId);
+        setAdvancedLinguistics(advancedData);
+      }
     } catch (err) {
       console.error(`Error fetching call details for ${callId}:`, err);
       setError(err as Error);
@@ -144,6 +155,26 @@ const CallAnalysisPage: React.FC = () => {
 
   const handleCallSelect = (callId: string) => {
     setSelectedCallId(callId);
+  };
+
+  const handleGenerateAdvancedAnalysis = async () => {
+    if (!selectedCall || !selectedCall.transcript) return;
+    
+    setIsLoading(true);
+    try {
+      const analysis = await CallAnalysisService.createAdvancedLinguisticsAnalysis(
+        selectedCall.id,
+        selectedCall.transcript,
+        selectedCall.recording_url
+      );
+      if (analysis) {
+        setAdvancedLinguistics(analysis);
+      }
+    } catch (error) {
+      console.error('Error generating advanced analysis:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const filteredCalls = callAnalyses.filter(call => 
@@ -542,7 +573,7 @@ const CallAnalysisPage: React.FC = () => {
                       ))}
                     </Box>
                   </Box>
-                  <Box>
+                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                     {selectedCall.recording_url && (
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <IconButton size="small">
@@ -558,6 +589,17 @@ const CallAnalysisPage: React.FC = () => {
                           <CloudDownloadIcon />
                         </IconButton>
                       </Box>
+                    )}
+                    {selectedCall.transcript && !advancedLinguistics && (
+                      <Button
+                        variant="contained"
+                        startIcon={<AnalyticsIcon />}
+                        onClick={handleGenerateAdvancedAnalysis}
+                        disabled={isLoading}
+                        size="small"
+                      >
+                        Generate Advanced Analysis
+                      </Button>
                     )}
                   </Box>
                 </Box>
@@ -584,6 +626,7 @@ const CallAnalysisPage: React.FC = () => {
                   <Tab label="Action Items" />
                   <Tab label="Questions" />
                   <Tab label="Transcript" />
+                  {advancedLinguistics && <Tab label="Advanced Insights" />}
                 </Tabs>
                 
                 <Divider />
@@ -690,6 +733,12 @@ const CallAnalysisPage: React.FC = () => {
                           No transcript available for this call
                         </Typography>
                       )}
+                    </Box>
+                  )}
+                  
+                  {activeTab === 7 && advancedLinguistics && (
+                    <Box>
+                      <AdvancedLinguisticsInsights analysis={advancedLinguistics} />
                     </Box>
                   )}
                 </Box>

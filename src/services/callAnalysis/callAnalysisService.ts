@@ -7,6 +7,7 @@
 
 import { supabase } from '../supabase/supabase';
 import { LinguisticsService } from '../linguistics/linguisticsService';
+import AdvancedLinguisticsService from '../linguistics/advancedLinguisticsService';
 import { CallAnalysis, CallAnalysisFilterOptions, LinguisticsAnalysis } from '../../types';
 import mockDataService from '../mockData/mockDataService';
 
@@ -371,5 +372,31 @@ export const CallAnalysisService = {
     }
     
     return data as CallAnalysis[];
+  },
+
+  /**
+   * Get advanced linguistics analysis for a call
+   */
+  async getAdvancedLinguisticsAnalysis(callId: string) {
+    try {
+      const analysis = await AdvancedLinguisticsService.getAnalysisByCallId(callId);
+      return analysis;
+    } catch (error) {
+      console.error(`Error fetching advanced linguistics analysis for call ${callId}:`, error);
+      return null;
+    }
+  },
+
+  /**
+   * Create advanced linguistics analysis for a call
+   */
+  async createAdvancedLinguisticsAnalysis(callId: string, transcript: string, audioUrl?: string) {
+    try {
+      const analysis = await AdvancedLinguisticsService.analyzeCallTranscript(callId, transcript, audioUrl);
+      return analysis;
+    } catch (error) {
+      console.error(`Error creating advanced linguistics analysis for call ${callId}:`, error);
+      return null;
+    }
   }
 };
