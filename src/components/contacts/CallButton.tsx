@@ -170,11 +170,14 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
         </DialogTitle>
         
         <DialogContent>
-          <Box 
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            my={2}
+          <div 
+            style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              marginTop: '16px',
+              marginBottom: '16px'
+            }}
           >
             {/* Contact info */}
             <Typography variant="h6">
@@ -230,7 +233,7 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
             
             {/* Call controls - only show during active call */}
             {callState === 'in-progress' && (
-              <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, my: 2 }}>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '16px', marginBottom: '16px' }}>
                 <IconButton 
                   onClick={handleToggleMute}
                   color={isMuted ? 'default' : 'primary'}
@@ -266,9 +269,9 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
                 >
                   {isSpeakerOn ? <VolumeUpIcon /> : <VolumeOffIcon />}
                 </IconButton>
-              </Box>
+              </div>
             )}
-          </Box>
+          </div>
           
           {/* Call notes and outcome - show when call is completed */}
           {(callState === 'completed' || callState === 'failed') && (
