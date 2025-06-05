@@ -7,7 +7,6 @@ import {
   DialogActions,
   Button,
   Typography,
-  Box,
   CircularProgress,
   Chip,
   TextField,
@@ -191,7 +190,7 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
             </Typography>
             
             {/* Call status */}
-            <Box sx={{ mt: 3, mb: 2 }}>
+            <div style={{ marginTop: '24px', marginBottom: '16px' }}>
               {callState === 'connecting' && (
                 <CircularProgress size={60} />
               )}
@@ -229,7 +228,7 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
                   sx={{ mb: 2 }} 
                 />
               )}
-            </Box>
+            </div>
             
             {/* Call controls - only show during active call */}
             {callState === 'in-progress' && (
@@ -275,7 +274,7 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
           
           {/* Call notes and outcome - show when call is completed */}
           {(callState === 'completed' || callState === 'failed') && (
-            <Box sx={{ mt: 3 }}>
+            <div style={{ marginTop: '24px' }}>
               <TextField
                 label="Call Notes"
                 multiline
@@ -308,7 +307,7 @@ const CallButton: React.FC<CallButtonProps> = ({ contact }) => {
                 onChange={(e) => setNextSteps(e.target.value)}
                 margin="normal"
               />
-            </Box>
+            </div>
           )}
         </DialogContent>
         
