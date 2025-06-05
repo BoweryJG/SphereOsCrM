@@ -296,14 +296,17 @@ const PersonalContacts: React.FC = () => {
             <DataGrid
               rows={filteredContacts}
               columns={columns}
-              pageSize={10}
-              rowsPerPageOptions={[10, 25, 50]}
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 10 },
+                },
+              }}
+              pageSizeOptions={[10, 25, 50]}
               checkboxSelection
-              disableSelectionOnClick
               autoHeight
               loading={loading}
-              onSelectionModelChange={setSelectedContacts}
-              selectionModel={selectedContacts}
+              onRowSelectionModelChange={(newSelection) => setSelectedContacts(newSelection as string[])}
+              rowSelectionModel={selectedContacts}
               sx={{
                 '& .MuiDataGrid-cell': {
                   borderBottom: 'none'
